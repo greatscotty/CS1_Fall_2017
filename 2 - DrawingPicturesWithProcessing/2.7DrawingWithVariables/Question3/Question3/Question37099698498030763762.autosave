@@ -1,0 +1,22 @@
+
+size (500,500);
+
+int rugX = width/2;
+int rugY = height/2 + height/3;
+int rugWidth = 250;
+int rugHeight = 100;
+
+//createRug
+ellipse(rugX, rugY ,rugWidth,rugHeight);
+
+//create colour rings in the rug
+fill(0,255,0);
+ellipse(rugX, rugY ,2*rugWidth/3,2*rugHeight/3);
+fill(255,0,0);
+ellipse(rugX, rugY ,rugWidth/3,rugHeight/3);
+
+//creat Fireplace
+rectMode(CENTER);
+rect(width/2, height/2,width/2,height/3);
+
+rect(width/2,height/2 - height/6 -height/4, width/3,height/2);

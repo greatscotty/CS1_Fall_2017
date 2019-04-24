@@ -1,0 +1,19 @@
+Decomposition: 
+    moons position, location of observer, time, different phases, angle of sun to moon, how much the eye can see from that location, names of moons phases, what complete a moon cycle, observation point, what results in a blue moon. Ideally a user would be in Location and time and get the phases and times surrounding. 
+
+ Pattern Recognition
+    Products, carts, credit cards, payment processor, inventory quantity, location, shipping, cost, personal identification, hosting, text fields, website
+    Person identification, text fields, hosting, website, buttons
+    Content, files, hosting, website, input fields, buttons
+
+    All have web fundimentas buttons, fields for input, content, a website
+
+Pattern Generalization and Abstraction
+    cat(colour, description)
+    sandwich(bread, shape, ingriedients)
+    transportation(medium of travel, fuel)
+
+Algorithms
+    Time assumptions - could walk faster or slower
+    Bus schedules may be off
+    Routes could have changed
