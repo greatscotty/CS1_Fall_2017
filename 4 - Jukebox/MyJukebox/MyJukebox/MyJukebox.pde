@@ -48,9 +48,18 @@ void draw(){
   drawButton(middleButtonX,buttonY,2);
   drawButton(leftButtonX,buttonY,1);
   drawButton(rightButtonX,buttonY,3);
+
+  mouseClicked(if (mouseY >= buttonY - (buttonHeight/2) &&
+    mouseY <= buttonY + (buttonHeight/2) &&
+    mouseX >= leftButtonX - (buttonWidth/2) &&
+    mouseX <= leftButtonX + (buttonWidth/2))
+{
+  // toggle playing the song
+})
 }
 
-void drawButton (int x, int y, int buttonNumber)
+void drawButton (
+  int x, int y, int buttonNumber)
   {
   fill(240);
   rectMode(CENTER);
@@ -59,3 +68,4 @@ void drawButton (int x, int y, int buttonNumber)
   fill(0);
   text(buttonNumber, x,y);
   }
+

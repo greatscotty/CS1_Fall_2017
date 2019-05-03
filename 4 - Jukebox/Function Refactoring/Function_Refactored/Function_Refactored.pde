@@ -5,9 +5,9 @@ Generalization - The creation of each concentric circle with lighter colour and 
                  confines for the pices of the process pieces as their implementation never changes 
                  only the details contained within them. 
 
-Hiding Details - Hiding details takes place in the variables themselves and fucntion built. The user
-                 no longer need to understand the full process that the program takes. Only the top
-                 of where to place the circles, how big the circle is to be, and the color they want
+Hiding Details - Hiding details takes place in the variables themselves and the function built. The user
+                 no longer need understand the full process that the program takes. Only the most basic
+                 information of where to place the circles, how big the circle is to be, and the color they want
                  it. Everything else is not nessacary for the user to understand so we can improve 
                  clarity through hiding this information. 
 */
