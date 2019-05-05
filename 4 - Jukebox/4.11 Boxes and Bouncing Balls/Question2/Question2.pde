@@ -4,16 +4,17 @@ int directionX;
 int directionY; 
 
 void setup() {
-    size(50, 50);
+    size(1000, 512);
     directionX = 1;
     directionY = 1;
-    currentX = 1;
-    currentY = 1;
-    frameRate(120);
+    currentX = 10;
+    currentY = 450;
+    frameRate(500);
+    background(0);
 }
 
 void draw() {
-    background(0);
+  
 
     ellipse(currentX, currentY, 25, 25);
 
@@ -35,7 +36,6 @@ void draw() {
         }
 
         reverseDirectionX();
-        
     }
 
         movement();
@@ -43,7 +43,7 @@ void draw() {
 
 void reverseDirectionX( )
 {
-    directionX = directionX * -1; //<>//
+    directionX = directionX * -1;
 }
 
 void reverseDirectionY( )
@@ -56,5 +56,5 @@ void movement()
 {
      
     currentX += (1 * directionX);
-    //currentY = currentY + (1 * directionY);
+    currentY = currentY + (1 * directionY);
 }
