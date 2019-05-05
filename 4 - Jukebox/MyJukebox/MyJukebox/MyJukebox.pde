@@ -69,3 +69,34 @@ void drawButton (
   text(buttonNumber, x,y);
   }
 
+////
+// When the mouse is clicked, we have to figure out
+// what button was clicked on and play/stop the song
+void mouseClicked()
+{  
+  // First check if we're in range in terms of the vertical
+  // click location, since it's the same for all three
+  if (mouseY >= buttonY - (buttonHeight/2) &&
+      mouseY <= buttonY + (buttonHeight/2))
+  {
+    // Now see which button we might have clicked on
+    if (mouseX >= leftButtonX - (buttonWidth/2) &&
+        mouseX <= leftButtonX + (buttonWidth/2))
+    {
+      // Left button clicked
+      toggleSong(song1Player, 1);
+    }
+    else if (mouseX >= middleButtonX - (buttonWidth/2) &&
+             mouseX <= middleButtonX + (buttonWidth/2))
+    {
+      // Middle button clicked
+      toggleSong(song2Player, 2);
+    }
+    else if (mouseX >= rightButtonX - (buttonWidth/2) &&
+             mouseX <= rightButtonX + (buttonWidth/2))
+    {
+      // Right button clicked
+      toggleSong(song3Player, 3);
+    }
+  }
+}
