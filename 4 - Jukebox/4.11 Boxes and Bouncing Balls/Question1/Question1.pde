@@ -4,57 +4,40 @@ int directionX;
 int directionY; 
 
 void setup() {
-    size(50, 50);
+    size(1000, 512);
     directionX = 1;
     directionY = 1;
     currentX = 1;
-    currentY = 1;
-    frameRate(120);
+    currentY = 400;
+    frameRate(500);
+    background(0);
 }
 
 void draw() {
+  
     background(0);
+    rect(450, 350, 300 , 100);
 
     ellipse(currentX, currentY, 25, 25);
 
-    if ((currentY == 0) || (currentY == height))
+    if (currentX >= (450-8))
     {
-        if ( ( (currentX == 0) || (currentX == width) ) ) 
-        {
-            reverseDirectionX();
-        }
-        
-        reverseDirectionY();
+        reverseDirectionX();
     }
-
     else if ( ( (currentX == 0) || (currentX == width) ) ) 
     {
-        if ((currentY == 0) || (currentY == height))
-        {
-            reverseDirectionY();
-        }
-
         reverseDirectionX();
-        
     }
 
-        movement();
+    movement();
 }
 
 void reverseDirectionX( )
 {
-    directionX = directionX * -1; //<>//
+    directionX = directionX * -1;
 }
-
-void reverseDirectionY( )
-{
-    directionY = directionY * -1;
-}
-
 
 void movement()
-{
-     
+{    
     currentX += (1 * directionX);
-    //currentY = currentY + (1 * directionY);
 }
