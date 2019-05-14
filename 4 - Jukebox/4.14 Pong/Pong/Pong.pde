@@ -1,21 +1,21 @@
+// Ball Variables
 int ballX;
 int ballY;
 int ballSize;
 
+//Paddle Varianbles
+int paddleWidth;
+int paddleHeight;
 int paddle1X;
 int paddle1Y;
-
 int paddle2X;
 int paddle2Y;
 
-int paddleWidth;
-int paddleHeight;
-
+//Score Variables
+PFont scoreFont;
 int scoreY;
 int score1X;
 int score2X;
-
-PFont scoreFont;
 
 void setup() 
 {
@@ -82,6 +82,7 @@ void drawScore(int score, int x)
 
 void keyPressed()
 {
+    //Paddle Movement Switches
     switch (key)
     {
         case 'w' :
