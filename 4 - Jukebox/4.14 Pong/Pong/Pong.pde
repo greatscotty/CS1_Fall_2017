@@ -17,6 +17,8 @@ PFont scoreFont;
 int scoreY;
 int score1X;
 int score2X;
+int scorePlayer1;
+int scorePlayer2; 
 
 void setup() 
 {
@@ -43,6 +45,9 @@ void setup()
     scoreY = height/15;
     score1X = width/4;
     score2X = 3*width/4;
+
+    scorePlayer1 = 0;
+    scorePlayer2 = 0; 
     
 }
 
@@ -51,8 +56,8 @@ void draw()
     background(0);
     drawDivider();
 
-    drawScore(1, score1X);
-    drawScore(1, score2X);
+    drawScore(scorePlayer1, score1X);
+    drawScore(scorePlayer2, score2X);
 
     drawBall();
     drawPaddle(paddle1X, paddle1Y);
@@ -175,12 +180,14 @@ void outOfBounds()
     {
         ballX = width/50 + 100;
         ballY =  height/8;
+        scorePlayer1++;
         ballMovement();
     }
     else if (ballX < 0 - ballSize)
     {
         ballX = 49*width/50 - 100;
         ballY =  height/8;
+        scorePlayer2++;
         ballMovement();
     }
     else
