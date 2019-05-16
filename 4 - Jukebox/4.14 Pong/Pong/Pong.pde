@@ -2,7 +2,9 @@
 int ballX;
 int ballY;
 int ballSize;
-int ballDirection;
+int ballXDirection;
+int ballYDirection;
+// int test;
 
 //Paddle Varianbles
 int paddleWidth;
@@ -28,7 +30,8 @@ void setup()
     ballX = 100;
     ballY = 100;
     ballSize = width /50;
-    ballDirection = 1;
+    ballXDirection = 1;
+    ballYDirection =1; 
 
     paddleHeight =  height/8;
     paddleWidth = width/50;
@@ -146,32 +149,53 @@ void hitSomething()
     {   
         if ((ballY <= paddle1Y + paddleHeight/2) &&  (ballY >= paddle1Y - paddleHeight/2))
         {
-        ballDirection();
+            ballXDirection();
+            ballYDirection(true);
         }
     }
 
     // check if hit paddle 2
-       if (ballX == paddle2X - paddleWidth/2)
+    else if (ballX == paddle2X - paddleWidth/2)
     {   
         if ((ballY <= paddle2Y + paddleHeight/2) &&  (ballY >= paddle2Y - paddleHeight/2))
         {
-        ballDirection();
+            ballXDirection();
+            ballYDirection(true);
         }
     }
     //check if hit ceiling of floor
-
+    else if ( (ballX < paddle2X - paddleWidth/2) && (ballX > paddle1X - paddleWidth/2))
+    {
+        if (ballY == 0 || ballY == height)
+        {
+            ballYDirection(false);
+        }
+    }
     //move the ball
     outOfBounds();
 }
 
 void ballMovement()
 {    
-    ballX += (1 * ballDirection);
+    ballX += (1 * ballXDirection);
+    ballY += (1 * ballYDirection);
 }
 
-void ballDirection()
-{
-    ballDirection = ballDirection * -1;
+void ballXDirection()
+{   
+    ballXDirection = ballXDirection* -1;
+}
+
+void ballYDirection(boolean hitPaddle)
+{   
+    if (hitPaddle == true)
+    {
+       ballYDirection = int(random(-2,2));
+    }
+    else
+    {
+        ballYDirection = ballYDirection* -1;
+    }
 }
 
 void outOfBounds()
