@@ -156,7 +156,7 @@ void hitSomething()
     //check if hit ceiling of floor
 
     //move the ball
-    ballMovement();
+    outOfBounds();
 }
 
 void ballMovement()
@@ -167,4 +167,24 @@ void ballMovement()
 void ballDirection()
 {
     ballDirection = ballDirection * -1;
+}
+
+void outOfBounds()
+{
+    if (ballX > width + ballSize)
+    {
+        ballX = width/50 + 100;
+        ballY =  height/8;
+        ballMovement();
+    }
+    else if (ballX < 0 - ballSize)
+    {
+        ballX = 49*width/50 - 100;
+        ballY =  height/8;
+        ballMovement();
+    }
+    else
+    {
+    ballMovement();
+    }
 }
