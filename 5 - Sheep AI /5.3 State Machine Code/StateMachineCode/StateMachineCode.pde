@@ -25,7 +25,7 @@ int roboY1;
 int roboSize1;
 int robotStopTime1;
 float roboDirection1;
-final int robotSpeed = 4;
+int robotSpeed;
 
 void setup() 
 {
@@ -54,6 +54,8 @@ void setup()
     robotStopTime1 = 0;  
     drawRobo(roboX1, roboY1, roboSize1, roboDirection1);
 
+    robotSpeed = 4;
+
 }
 
 void draw()
@@ -64,37 +66,97 @@ void draw()
     drawBeacon();
     drawRobo(roboX1, roboY1, roboSize1, roboDirection1);
     moveRobo1();
+    updateRobotState();
 }
 
 void updateRobotState()
 {
     if (robotState == cleanState)
     {
+        robotSpeed = 4; 
 
+         if (roboX1 <= soapyPuddleX + soapyPuddleWidth/2 && roboX1 >= soapyPuddleX - soapyPuddleWidth/2)
+        {
+            if (roboY1 <= soapyPuddleY + soapyPuddleHeight/2 && roboY1 >= soapyPuddleY - soapyPuddleHeight/2)
+            {
+            robotState = cleanState;
+            }
+        }
+           else if (roboX1 <= mudPuddleX + mudPuddleWidth/2 && roboX1 >= mudPuddleX - mudPuddleWidth/2)
+        {
+            if (roboY1 <= mudPuddleY + mudPuddleHeight/2 && roboY1 >= mudPuddleY - mudPuddleHeight/2)
+            {
+            robotState = fullDirty;
+            }
+        }
     }
     else if (robotState == fullDirty)
     {
+        robotSpeed = 2;
 
+        if (roboX1 <= soapyPuddleX + soapyPuddleWidth/2 && roboX1 >= soapyPuddleX - soapyPuddleWidth/2)
+        {
+            if (roboY1 <= soapyPuddleY + soapyPuddleHeight/2 && roboY1 >= soapyPuddleY - soapyPuddleHeight/2)
+            {
+            robotState = cleanState;
+            }
+        }
     }
     else if (robotState ==  halfDirty)
     {
-
+        robotSpeed = 3;
+          if (roboX1 <= soapyPuddleX + soapyPuddleWidth/2 && roboX1 >= soapyPuddleX - soapyPuddleWidth/2)
+        {
+            if (roboY1 <= soapyPuddleY + soapyPuddleHeight/2 && roboY1 >= soapyPuddleY - soapyPuddleHeight/2)
+            {
+            robotState = cleanState;
+            }
+        }
+           else if (roboX1 <= mudPuddleX + mudPuddleWidth/2 && roboX1 >= mudPuddleX - mudPuddleWidth/2)
+        {
+            if (roboY1 <= mudPuddleY + mudPuddleHeight/2 && roboY1 >= mudPuddleY - mudPuddleHeight/2)
+            {
+            robotState = fullDirty;
+            }
+        }
     }
 }
 
+void mouseClicked()
+{
+    if (mouseX <= (roboX1 + roboSize1/2) && mouseX >= (roboX1 - roboSize1/2) ) 
+    {
+        if (mouseY <= (roboY1 + roboSize1/2) && mouseY >= (roboX1 - roboSize1/2) ) 
+        {
+            clickClean();
+        }
+    }
+}
+
+void clickClean()
+{
+    if (robotState == fullDirty)
+    {
+        robotState = halfDirty;
+    }
+    else if (robotState == halfDirty)
+    {
+        robotState = cleanState;   
+    }
+}
 
 void drawMudPuddle()
 {   
     fill(110, 60, 20);
     rectMode(CENTER);
-    rectangle(mudPuddleX, mudPuddleY, mudPuddleWidth, mudPuddleHeight);
+    rect(mudPuddleX, mudPuddleY, mudPuddleWidth, mudPuddleHeight);
 }
 
 void drawCleanPuddle()
 {
     fill(155, 245, 210);
     rectMode(CENTER);
-    ellipse(soapyPuddleX, soapyPuddleY, soapyPuddleWidth, soapyPuddleHeight);  
+    rect(soapyPuddleX, soapyPuddleY, soapyPuddleWidth, soapyPuddleHeight);  
 }
 
 void drawRobo(int robotX, int robotY, int robotSize, float roboDirection)
