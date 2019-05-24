@@ -31,6 +31,9 @@ final int sheepStateColors = 3;
 
 int sheepState;
 
+final int circleShift = 40;
+
+
 
 // Stuff that gets done just once at the beginning
 // of the program. Set up values that either need
@@ -109,6 +112,11 @@ void drawSheep()
   }
   else
   {
+    if (sheepState == sheepStateColors)
+    {
+      drawRings(sheepX, sheepY, circleShift);
+    }
+
     image(sheepTeaImage, sheepX, sheepY);
   }
 }
@@ -148,4 +156,11 @@ void moveSheep()
       }
     }
   }
+}
+
+void drawRings(int x, int y, int radiusChange)
+{
+  float maxDistance = max(dist(x, y, 0, 0), dist(x, y, 0, height));
+  maxDistance = max(maxDistance, dist(x, y, width, 0));
+  maxDistance = max(maxDistance, dist(x, y, width, height));
 }
