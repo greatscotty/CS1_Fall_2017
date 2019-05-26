@@ -7,7 +7,7 @@ void setup()
 {
    size(512, 512); 
    background(200, 175, 0);
-   numSquares = 81;
+   numSquares = int(sq(20));
    spaceBetween = width/200;
    sqrtSquare = sqrt(numSquares);
    squareSize = (width - (spaceBetween *(sqrtSquare +1))) / sqrtSquare;
