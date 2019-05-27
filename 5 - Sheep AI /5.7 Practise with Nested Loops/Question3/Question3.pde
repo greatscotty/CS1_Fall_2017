@@ -11,6 +11,7 @@ void setup()
     numberY = 1;
     spaceing = width/11;
     numberFont = loadFont("Serif-48.vlw");
+    textMode(CENTER);
 }
 
 void draw() 
