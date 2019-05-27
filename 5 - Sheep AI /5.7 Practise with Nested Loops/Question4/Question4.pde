@@ -1,54 +1,44 @@
-int  numSquares;
-int spaceBetween; 
-float squareSize;
-float sqrtSquare; 
+int floorSpacing;
+int floorNumber;
+int windowSpacing;
+int floorWidth;
+int floorHeight;
 
-void setup() 
+void setup()
 {
-   size(512, 512); 
-   background(200, 175, 0);
-   numSquares = int(sq(20));
-   spaceBetween = width/200;
-   sqrtSquare = sqrt(numSquares);
-   squareSize = (width - (spaceBetween *(sqrtSquare +1))) / sqrtSquare;
+    size(512, 512); 
+    floorSpacing = height/22;
+    floorHeight = height/22;
+    floorWidth = width* 3/4;
+    floorNumber = -0;
+    rectMode(CENTER); 
 }
 
-void draw()
-{   
-    int squareRowNumber = 0;
-    while (squareRowNumber < int(sqrt(numSquares)))
+void draw() 
+{
+    drawFloor();
+}
+
+void drawFloor()
+{
+    while (floorNumber < 20) 
     {
-        int squareColNumber = 0;
-        while(squareColNumber < int(sqrt(numSquares)))
-        {
-            float squareX = (squareColNumber +1)* spaceBetween + (squareColNumber)* squareSize;
-            float squareY = (squareRowNumber +1)* spaceBetween + (squareRowNumber)* squareSize;
-            if (squareColNumber%2 == 0) 
-            {   
-                if (squareRowNumber%2 ==0) 
-                {
-                    fill(255, 0, 0);
-                }
-                else
-                {
-                    fill(0);
-                }
-            }
-            else
-            {
-                if (squareRowNumber%2 ==0) 
-                {
-                    fill(0);
-                }
-                else
-                {
-                    fill(255, 0, 0);
-                }
-            }
-            
-            rect(squareX, squareY, squareSize, squareSize);
-            squareColNumber++;
-        }
-        squareRowNumber++; 
+        rect(width/2 , ((height - floorSpacing/2 ) - ( floorNumber * floorSpacing)), width * 3/4, floorSpacing );
+        drawWindows();
+        floorNumber++;
+    }
+    
+}
+
+void drawWindows()
+{
+    int windowNumber = 0; 
+    while (windowNumber < 10)
+    {
+        rect( ((floorWidth/11) * (windowNumber + 1 ) + (width/8)),
+         ((height - floorSpacing/2 ) - ( floorNumber * floorSpacing)) ,
+         (floorWidth) / 20,
+          floorSpacing/2);
+         windowNumber++; 
     }
 }
