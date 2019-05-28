@@ -33,6 +33,8 @@ int sheepState;
 
 final int circleShift = 40;
 
+boolean fillRed;
+
 
 
 // Stuff that gets done just once at the beginning
@@ -163,13 +165,24 @@ void drawRings(int x, int y, int radiusChange)
   float maxDistance = max(dist(x, y, 0, 0), dist(x, y, 0, height));
   maxDistance = max(maxDistance, dist(x, y, width, 0));
   maxDistance = max(maxDistance, dist(x, y, width, height));
+  
+  fillRed = true; 
 
-  noFill();
- 
-  float radius = 0;
-  while (radius < maxDistance)
+  float radius = maxDistance;
+  while (radius > 0)
   { 
+    if (fillRed == true)
+    {
+      fill(255, 0, 0);
+      fillRed = false;
+    }
+    else
+    {
+      fill(0, 255, 0);
+      fillRed = true;
+    }
+
     ellipse(x, y, 2*radius, 2*radius);
-    radius += radiusChange;
+    radius -= radiusChange;
   }
 }
