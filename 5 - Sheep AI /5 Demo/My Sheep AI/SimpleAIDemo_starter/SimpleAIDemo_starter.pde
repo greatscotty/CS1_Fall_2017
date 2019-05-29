@@ -33,9 +33,20 @@ int sheepState;
 
 final int circleShift = 40;
 
-boolean fillRed;
 
+final color[] listOfColors =
+{
+  color(227, 41, 41), // red
+  color(214, 122, 224), // purple
+  color(115, 111, 234), // blue
+  color(83, 216, 97), // green
+  color(252, 255, 95), // yellow
+  color(211, 133, 15), // brown
+  color(175, 202, 216), // blue 
+};
 
+final int numFramesToShiftColor = 10;
+int colorStartIndex;
 
 // Stuff that gets done just once at the beginning
 // of the program. Set up values that either need
@@ -52,6 +63,8 @@ void setup()
   sheepX = width/2;
   sheepY = height/2;
   sheepDirection = 0;
+
+  colorStartIndex=0;
 
   sheepState = sheepStateWander;
 }
@@ -100,6 +113,14 @@ void updateSheepState()
     {
       sheepState = sheepStateStop;
     }
+    else if (frameCount % numFramesToShiftColor == 0)
+    {
+      colorStartIndex++;
+      if (colorStartIndex >= listOfColors.length)
+      {
+        colorStartIndex = 0;
+      }
+    }
   }
 }
 
@@ -116,7 +137,7 @@ void drawSheep()
   {
     if (sheepState == sheepStateColors)
     {
-      drawRings(sheepX, sheepY, circleShift);
+      drawRings(sheepX, sheepY, circleShift, listOfColors, colorStartIndex);
     }
 
     image(sheepTeaImage, sheepX, sheepY);
@@ -160,26 +181,22 @@ void moveSheep()
   }
 }
 
-void drawRings(int x, int y, int radiusChange)
+void drawRings(int x, int y, int radiusChange, color[] colors, int startIndex)
 {
   float maxDistance = max(dist(x, y, 0, 0), dist(x, y, 0, height));
   maxDistance = max(maxDistance, dist(x, y, width, 0));
   maxDistance = max(maxDistance, dist(x, y, width, height));
-  
-  fillRed = true; 
 
   float radius = maxDistance;
+  int colorIndex = startIndex; 
   while (radius > 0)
   { 
-    if (fillRed == true)
+    fill(colors[colorIndex]);
+    colorIndex++;
+
+    if (colorIndex >= colors.length)
     {
-      fill(255, 0, 0);
-      fillRed = false;
-    }
-    else
-    {
-      fill(0, 255, 0);
-      fillRed = true;
+      colorIndex = 0; 
     }
 
     ellipse(x, y, 2*radius, 2*radius);
