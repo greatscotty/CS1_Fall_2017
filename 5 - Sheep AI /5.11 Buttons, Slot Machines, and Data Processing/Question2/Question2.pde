@@ -16,7 +16,13 @@ final int numberOfReels = 3;
 int[] reelPosition = new int[numberOfReels];
 int[] reelX = new int[numberOfReels];
 int[] reelSpinSpeed = { 5, 8, 10};
+
+int startandStopX;
+int startandStopY;
+int startandStopWidth;
+int startandStopHeight;
     
+boolean reelsSpinning;
 
 void setup()
 {
@@ -26,6 +32,13 @@ void setup()
     reelY =  height/2;
     reelWidth = width/ (3*numberOfReels) ;
     reelHeight = height/8 ;
+    reelsSpinning = true;
+
+    startandStopX = width* 4/5;
+    startandStopY = height * 4/5;
+
+    startandStopWidth = width/6;
+    startandStopHeight = height/15;
 
     randomizeReelPositions();
     setReelX();
@@ -34,6 +47,7 @@ void setup()
 void draw()
 {
     drawReels();
+    drawStartandStopButtons();
 }
 
 void randomizeReelPositions()
@@ -65,7 +79,11 @@ void drawReels()
         rect(reelX[arrayIndex], reelY, reelWidth, reelHeight);
         arrayIndex++;
     }
-    spinReels();
+    if (reelsSpinning == true)
+    {
+        spinReels();
+    }
+    
 }
 
 void spinReels()
@@ -85,5 +103,34 @@ void spinReels()
         reelPosition[i]= 0;    
         }
         i++;
+    }
+}
+
+void  drawStartandStopButtons()
+{   
+    if(reelsSpinning == true)
+    {   
+        fill(255, 0, 0);
+    }
+    else
+    {
+        fill(0, 255, 0);
+    }
+    rect(startandStopX, startandStopY, startandStopWidth, startandStopHeight);
+ 
+}
+
+void mouseClicked() 
+{ 
+    if (mouseX >= startandStopX - startandStopWidth/2 && mouseX <= startandStopX + startandStopWidth/2)
+    {
+        if(reelsSpinning == true)
+        {
+            reelsSpinning = false;
+        }
+        else 
+        {
+            reelsSpinning = true;
+        }
     }
 }
