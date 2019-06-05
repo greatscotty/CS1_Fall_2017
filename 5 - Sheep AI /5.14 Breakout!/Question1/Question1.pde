@@ -94,16 +94,16 @@ void bounds()
         println("Hit Wall");
         ballXDirection = -1;
     }
-    else if (ballY >= paddleY - ballSize +10 && ballY <= paddleY + paddleHeight/2)
+    else if (ballY >= paddleY - paddleHeight/2 - ballSize/2 && ballY <= paddleY + paddleHeight/2)
     {
-        println("Hit Paddle");
         if (ballX >= paddleX - paddleWidth/2 && ballX <= paddleX + paddleWidth/2)
         {
+            println("Hit Paddle");
             ballYDirection = -1;
             ballXDirection = changeDirection(ballXDirection);
         }
     }
-    else if (ballY >= height + ballSize/2)
+    else if (ballY >= height + ballSize/2) // Off Playzone
     {
         if(lifesRemaining == 0)     
         {
