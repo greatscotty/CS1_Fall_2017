@@ -73,17 +73,25 @@ void paddleMovement( int distance)
 
 void bounds()
 {
-    if (ballY == 0 && ballX >= 0)
+    if (ballY == 0 && ballX >= 0) // top of playzone
     {
         println("Hit Wall");
+        ballYDirection = 1;
     }
-    else if (ballX == 0 && ballY >= 0) 
+    else if (ballX == 0 && ballY >= 0) //left of playzone
     {
-        println("Hit Wall");
+        ballXDirection = 1;
     }
-    else if (ballX == width && ballY >= 0) 
+    else if (ballX == width && ballY >= 0)  // right of playzone
     {
-        println("Hit Wall");
+        ballXDirection = -1;
+    }
+    else if (ballY == paddleY - ballSize)
+    {
+        if (ballX >= paddleX - paddleWidth/2 || ballX <= paddleX + paddleWidth/2)
+        {
+            ballYDirection = changeDirection(ballYDirection);
+        }
     }
 }
 
@@ -91,4 +99,9 @@ void ballMovement()
 {    
     ballX += (1 * ballXDirection);
     ballY += (1 * ballYDirection);
+}
+
+int changeDirection(int direction)
+{
+    return direction * -1;
 }
