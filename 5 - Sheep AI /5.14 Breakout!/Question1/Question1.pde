@@ -15,6 +15,13 @@ float ballYDirection;
 
 //Game Variables
 int lifesRemaining; 
+int score;
+
+//Brick Variables
+int numOfBricks
+int[] brickX = new int[numOfBricks];
+int[] brickY = new int[numOfBricks];
+int[] brickColour = new int[numOfBricks];
 
 void setup() 
 {
