@@ -14,20 +14,39 @@ float ballXDirection;
 float ballYDirection; 
 
 //Game Variables
+PFont gameFont;
 int lifesRemaining; 
 int score;
+boolean gameOver = false;
 
 //Brick Variables
-int numOfBricks
+final int numOfBricks = 10;
+color[] brickColour = new color[numOfBricks];
 int[] brickX = new int[numOfBricks];
 int[] brickY = new int[numOfBricks];
-int[] brickColour = new int[numOfBricks];
+int brickWidth; 
+int brickHeight; 
 
 void setup() 
 {
     size(512, 512);
     background(100);
     rectMode(CENTER);
+
+    gameFont =  loadFont("Arial-Black-48.vlw");
+    textFont(gameFont, 36);
+    textAlign(CENTER,CENTER);
+    
+    int brickNum = 0; 
+    brickWidth = width/numOfBricks; 
+    brickHeight = height/30; 
+    while(brickNum < brickX.length)
+    {
+        brickX[brickNum] = (width/numOfBricks) * brickNum + brickWidth/2;
+        brickY[brickNum] = 0 + brickHeight/2; 
+        brickColour[brickNum] = color(255 , 0, 0);
+        brickNum++;
+    }
 
     paddleX = width/2;
     paddleY = height - 40;
@@ -47,11 +66,13 @@ void setup()
 void draw() 
 {
     background(100);
+    fill(255);
     rect(paddleX, paddleY, paddleWidth, paddleHeight);
     ellipse(ballX, ballY, ballSize, ballSize);
     bounds();
     ballDisplacement();
-   
+    drawUI();
+    drawBricks();
 }
 
 void keyPressed()
@@ -114,7 +135,7 @@ void bounds()
     {
         if(lifesRemaining == 0)     
         {
-            println("Game Over, YOU LOSE!");
+            gameOver = true;
         }
         else
         {
@@ -123,7 +144,6 @@ void bounds()
             lifesRemaining--;
         } 
     }
-
 }
 
 void ballDisplacement()
@@ -145,4 +165,25 @@ void ballSetup()
     ballSpeed = 2;
     ballXDirection = 1; 
     ballYDirection = -1;
+}
+
+void drawUI()
+{
+    text(lifesRemaining, width - 100, 100 );
+    text(score, 100, 100);
+    if (gameOver == true)
+    {
+        text("Game Over! You LOSE!", width/2, height/2);
+    }
+}
+
+void drawBricks()
+{
+    int brickNum = 0;
+    while (brickNum < brickX.length)
+    {
+        fill(brickColour[brickNum]);
+        rect(brickX[brickNum], brickY[brickNum], brickWidth, brickHeight);
+        brickNum++;
+    }
 }
