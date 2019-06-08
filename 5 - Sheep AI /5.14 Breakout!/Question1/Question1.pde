@@ -20,7 +20,8 @@ int score;
 boolean gameOver = false;
 
 //Brick Variables
-final int numOfBricks = 10;
+final int numOfBricks = 28;
+final int numOfRows = 2;
 color[] brickColour = new color[numOfBricks];
 int[] brickX = new int[numOfBricks];
 int[] brickY = new int[numOfBricks];
@@ -38,13 +39,20 @@ void setup()
     textAlign(CENTER,CENTER);
     
     int brickNum = 0; 
-    brickWidth = width/numOfBricks; 
+    int brickRow = 0;
+    brickWidth = width/(numOfBricks/numOfRows); 
     brickHeight = height/30; 
+
     while(brickNum < brickX.length)
     {
-        brickX[brickNum] = (width/numOfBricks) * brickNum + brickWidth/2;
-        brickY[brickNum] = 0 + brickHeight/2; 
         brickColour[brickNum] = color(255 , 0, 0);
+        brickX[brickNum] = (width/(numOfBricks/numOfRows)) * brickNum  + brickWidth/2;
+        brickY[brickNum] = (brickHeight *  brickRow) + brickHeight/2; 
+        
+        if ((brickNum + 1) % (numOfBricks/numOfRows) == 0) 
+        {
+            brickRow++;
+        }
         brickNum++;
     }
 
@@ -183,7 +191,7 @@ void drawBricks()
     int brickNum = 0;
     while (brickNum < brickX.length)
     {   
-        if (brickColour[brickNum] !=  color(0, 0, 0))
+        if (brickColour[brickNum] !=  color(0, 0, 0)) // if brick is black don't draw the brick 
         {
             fill(brickColour[brickNum]);
             rect(brickX[brickNum], brickY[brickNum], brickWidth, brickHeight);
@@ -198,7 +206,7 @@ void hitBrick()
     
     while (brickNum < brickX.length)
     {
-        if (brickColour[brickNum] != color(0, 0, 0))
+        if (brickColour[brickNum] != color(0, 0, 0))// check if brick has been drawn. 
         {
             if (ballY >= brickY[brickNum] - brickHeight/2 && ballY <= brickY[brickNum] + brickHeight/2 )
             {
@@ -212,5 +220,4 @@ void hitBrick()
         }  
         brickNum++;
     }
-    
 }
