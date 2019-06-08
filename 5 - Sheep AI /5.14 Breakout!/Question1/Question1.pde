@@ -185,8 +185,8 @@ void drawBricks()
     {   
         if (brickColour[brickNum] !=  color(0, 0, 0))
         {
-             fill(brickColour[brickNum]);
-          rect(brickX[brickNum], brickY[brickNum], brickWidth, brickHeight);
+            fill(brickColour[brickNum]);
+            rect(brickX[brickNum], brickY[brickNum], brickWidth, brickHeight);
         } 
         brickNum++;
     }
@@ -195,17 +195,22 @@ void drawBricks()
 void hitBrick()
 {   
     int brickNum = 0; 
-    if (ballY >= brickY[1] - brickHeight/2 && ballY <= brickY[1] + brickHeight/2 )
+    
+    while (brickNum < brickX.length)
     {
-        while (brickNum < brickX.length)
+        if (brickColour[brickNum] != color(0, 0, 0))
         {
-            if (ballX >= (brickX[brickNum] - brickWidth/2) && ballX <= (brickX[brickNum] + brickWidth/2) )
+            if (ballY >= brickY[brickNum] - brickHeight/2 && ballY <= brickY[brickNum] + brickHeight/2 )
             {
-                brickColour[brickNum] = color(0, 0, 0); // change colour if hit
-                ballXDirection = changeDirection(ballXDirection);
-                ballYDirection = ballYDirection * -1;
-            }  
-            brickNum++;
-        }
+                if (ballX >= (brickX[brickNum] - brickWidth/2) && ballX <= (brickX[brickNum] + brickWidth/2) )
+                {
+                    brickColour[brickNum] = color(0, 0, 0); // change colour if hit
+                    ballXDirection = changeDirection(ballXDirection);
+                    ballYDirection = ballYDirection * -1;
+                }  
+            }
+        }  
+        brickNum++;
     }
+    
 }
