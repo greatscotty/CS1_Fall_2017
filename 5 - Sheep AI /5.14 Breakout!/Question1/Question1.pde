@@ -182,9 +182,12 @@ void drawBricks()
 {
     int brickNum = 0;
     while (brickNum < brickX.length)
-    {
-        fill(brickColour[brickNum]);
-        rect(brickX[brickNum], brickY[brickNum], brickWidth, brickHeight);
+    {   
+        if (brickColour[brickNum] !=  color(0, 0, 0))
+        {
+             fill(brickColour[brickNum]);
+          rect(brickX[brickNum], brickY[brickNum], brickWidth, brickHeight);
+        } 
         brickNum++;
     }
 }
@@ -198,7 +201,7 @@ void hitBrick()
         {
             if (ballX >= (brickX[brickNum] - brickWidth/2) && ballX <= (brickX[brickNum] + brickWidth/2) )
             {
-                brickColour[brickNum] = color(255, 255, 0); // change colour if hit
+                brickColour[brickNum] = color(0, 0, 0); // change colour if hit
                 ballXDirection = changeDirection(ballXDirection);
                 ballYDirection = ballYDirection * -1;
             }  
