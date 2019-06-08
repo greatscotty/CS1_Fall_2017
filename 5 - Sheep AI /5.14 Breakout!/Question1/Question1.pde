@@ -73,6 +73,7 @@ void draw()
     ballDisplacement();
     drawUI();
     drawBricks();
+    hitBrick();
 }
 
 void keyPressed()
@@ -122,7 +123,7 @@ void bounds()
         println("Hit Wall");
         ballXDirection = -1;
     }
-    else if (ballY >= paddleY - paddleHeight/2 - ballSize/2 && ballY <= paddleY + paddleHeight/2)
+    else if (ballY >= paddleY - paddleHeight/2 - ballSize/2 && ballY <= paddleY + paddleHeight/2) // paddle handling
     {
         if (ballX >= paddleX - paddleWidth/2 && ballX <= paddleX + paddleWidth/2)
         {
@@ -185,5 +186,23 @@ void drawBricks()
         fill(brickColour[brickNum]);
         rect(brickX[brickNum], brickY[brickNum], brickWidth, brickHeight);
         brickNum++;
+    }
+}
+
+void hitBrick()
+{   
+    int brickNum = 0; 
+    if (ballY >= brickY[1] - brickHeight/2 && ballY <= brickY[1] + brickHeight/2 )
+    {
+        while (brickNum < brickX.length)
+        {
+            if (ballX >= (brickX[brickNum] - brickWidth/2) && ballX <= (brickX[brickNum] + brickWidth/2) )
+            {
+                brickColour[brickNum] = color(255, 255, 0); // change colour if hit
+                ballXDirection = changeDirection(ballXDirection);
+                ballYDirection = ballYDirection * -1;
+            }  
+            brickNum++;
+        }
     }
 }
