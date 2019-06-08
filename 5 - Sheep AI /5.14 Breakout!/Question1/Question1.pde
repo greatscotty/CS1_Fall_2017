@@ -20,8 +20,8 @@ int score;
 boolean gameOver = false;
 
 //Brick Variables
-final int numOfBricks = 28;
-final int numOfRows = 2;
+final int numOfBricks = 112;
+final int numOfRows = 8;
 color[] brickColour = new color[numOfBricks];
 int[] brickX = new int[numOfBricks];
 int[] brickY = new int[numOfBricks];
@@ -40,15 +40,24 @@ void setup()
     
     int brickNum = 0; 
     int brickRow = 0;
+    int brickColumn = 0; 
     brickWidth = width/(numOfBricks/numOfRows); 
     brickHeight = height/30; 
 
     while(brickNum < brickX.length)
     {
         brickColour[brickNum] = color(255 , 0, 0);
-        brickX[brickNum] = (width/(numOfBricks/numOfRows)) * brickNum  + brickWidth/2;
+        brickX[brickNum] = brickWidth * brickColumn + brickWidth/2;
         brickY[brickNum] = (brickHeight *  brickRow) + brickHeight/2; 
-        
+
+        if((brickNum + 1) % (numOfBricks/numOfRows) == 0) 
+        {
+            brickColumn = 0;
+        }
+        else 
+        {
+            brickColumn++;       
+        }
         if ((brickNum + 1) % (numOfBricks/numOfRows) == 0) 
         {
             brickRow++;
