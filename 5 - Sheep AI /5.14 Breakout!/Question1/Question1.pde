@@ -22,6 +22,13 @@ boolean gameOver = false;
 //Brick Variables
 final int numOfBricks = 112;
 final int numOfRows = 8;
+final color[] listOfColours = 
+{
+    color(255, 0, 0), //red 
+    color(230, 130 , 50), // orange
+    color(0, 255, 0), // green
+    color(245 , 200, 70), //yellow
+}
 color[] brickColour = new color[numOfBricks];
 int[] brickX = new int[numOfBricks];
 int[] brickY = new int[numOfBricks];
