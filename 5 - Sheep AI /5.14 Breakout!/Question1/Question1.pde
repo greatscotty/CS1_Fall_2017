@@ -27,7 +27,7 @@ final color[] listOfColours =
     color(255, 0, 0), //red 
     color(230, 130 , 50), // orange
     color(0, 255, 0), // green
-    color(245 , 200, 70), //yellow
+    color(245 , 200, 70) //yellow
 };
 color[] brickColour = new color[numOfBricks];
 int[] brickX = new int[numOfBricks];
@@ -95,9 +95,9 @@ void draw()
     ellipse(ballX, ballY, ballSize, ballSize);
     bounds();
     ballDisplacement();
-    drawUI();
     drawBricks();
     hitBrick();
+    drawUI();
 }
 
 void keyPressed()
@@ -193,7 +193,8 @@ void ballSetup()
 }
 
 void drawUI()
-{
+{   
+    fill(255);
     text(lifesRemaining, width - 100, 100 );
     text(score, 100, 100);
     if (gameOver == true)
@@ -226,8 +227,10 @@ void hitBrick()
         {
             if (ballY >= brickY[brickNum] - brickHeight/2 && ballY <= brickY[brickNum] + brickHeight/2 )
             {
-                if (ballX >= (brickX[brickNum] - brickWidth/2) && ballX <= (brickX[brickNum] + brickWidth/2) )
+                if (ballX >= (brickX[brickNum] - brickWidth/2) && ballX <= (brickX[brickNum] + brickWidth/2) ) //brick is hit
                 {
+                    println("increment score");
+                    scorekeeper(brickColour[brickNum]);
                     brickColour[brickNum] = color(0, 0, 0); // change colour if hit
                     ballXDirection = changeDirection(ballXDirection);
                     ballYDirection = ballYDirection * -1;
@@ -235,5 +238,25 @@ void hitBrick()
             }
         }  
         brickNum++;
+    }
+}
+
+void scorekeeper(color brickColour)
+{
+    if (brickColour == color(255, 0, 0))//red 
+    {
+        score += 7;
+    }
+    else if (brickColour == color(230, 130 , 50)) // orange
+    {
+        score += 5;
+    }
+    else if (brickColour == color(0, 255, 0))// green
+    {
+        score += 3;
+    }
+    else if (brickColour == color(245 , 200, 70))//yellow
+    {
+        score += 1;
     }
 }
