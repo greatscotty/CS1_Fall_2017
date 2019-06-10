@@ -90,7 +90,7 @@ void setup()
     ballXDirection = 1; 
     ballYDirection = -1;
 
-    lifesRemaining = 3;
+    lifesRemaining = 2;
 }
 
 void draw() 
