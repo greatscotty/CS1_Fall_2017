@@ -28,7 +28,7 @@ final color[] listOfColours =
     color(230, 130 , 50), // orange
     color(0, 255, 0), // green
     color(245 , 200, 70), //yellow
-}
+};
 color[] brickColour = new color[numOfBricks];
 int[] brickX = new int[numOfBricks];
 int[] brickY = new int[numOfBricks];
@@ -53,7 +53,7 @@ void setup()
 
     while(brickNum < brickX.length)
     {
-        brickColour[brickNum] = color(255 , 0, 0);
+        brickColour[brickNum] = listOfColours[brickRow/2]; // uses a cheat with int division. :) 
         brickX[brickNum] = brickWidth * brickColumn + brickWidth/2;
         brickY[brickNum] = (brickHeight *  brickRow) + brickHeight/2; 
 
