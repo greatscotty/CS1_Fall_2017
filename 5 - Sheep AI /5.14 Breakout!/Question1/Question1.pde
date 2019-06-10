@@ -11,13 +11,19 @@ float ballX;
 float ballSize;
 float ballSpeed;
 float ballXDirection;
-float ballYDirection; 
+float ballYDirection;
+int ballState; 
+final int normalState = 1;
+final int fastState = 2;
 
 //Game Variables
 PFont gameFont;
 int lifesRemaining; 
 int score;
 boolean gameOver = false;
+boolean hitOrangeBrick = false;
+boolean hitRedBrick = false;
+int bricksHit = 0;
 
 //Brick Variables
 final int numOfBricks = 112;
@@ -164,7 +170,7 @@ void bounds()
         }
         else
         {
-            println("Out of Bounds, Lose a Life!");
+            // println("Out of Bounds, Lose a Life!");
             ballSetup(); 
             lifesRemaining--;
         } 
@@ -190,6 +196,10 @@ void ballSetup()
     ballSpeed = 2;
     ballXDirection = 1; 
     ballYDirection = -1;
+    hitOrangeBrick = false;
+    hitRedBrick = false;
+    bricksHit = 0;
+    ballState = normalState;
 }
 
 void drawUI()
@@ -229,8 +239,10 @@ void hitBrick()
             {
                 if (ballX >= (brickX[brickNum] - brickWidth/2) && ballX <= (brickX[brickNum] + brickWidth/2) ) //brick is hit
                 {
-                    println("increment score");
+                    // println("increment score");
                     scorekeeper(brickColour[brickNum]);
+                    bricksHit++;
+                    ballSpeedChanger();
                     brickColour[brickNum] = color(0, 0, 0); // change colour if hit
                     ballXDirection = changeDirection(ballXDirection);
                     ballYDirection = ballYDirection * -1;
@@ -246,10 +258,12 @@ void scorekeeper(color brickColour)
     if (brickColour == color(255, 0, 0))//red 
     {
         score += 7;
+        hitRedBrick = true;
     }
     else if (brickColour == color(230, 130 , 50)) // orange
     {
         score += 5;
+        hitOrangeBrick = true;
     }
     else if (brickColour == color(0, 255, 0))// green
     {
@@ -258,5 +272,36 @@ void scorekeeper(color brickColour)
     else if (brickColour == color(245 , 200, 70))//yellow
     {
         score += 1;
+    }
+}
+
+void ballSpeedChanger()
+{   
+    if ((hitOrangeBrick == true || hitRedBrick == true) && ballState == normalState)
+    {   
+        ballSpeed = 2.5;
+        println("Fast State ballSpeed: "+ballSpeed); 
+        if (bricksHit >4 && bricksHit <=11)
+        {
+            ballSpeed = ballSpeed + 0.25;
+            println("Fast state 4 hits ballSpeed: "+ballSpeed);
+        }
+        else if (bricksHit > 12)
+        {
+            ballSpeed = ballSpeed + 0.50;
+            println("faste state 12 hits ballSpeed: "+ballSpeed);
+        }
+        ballState = fastState;
+    }
+
+    if (bricksHit == 4)
+    {
+        ballSpeed = ballSpeed + 0.25;
+        println(" 4 hits ballSpeed: "+ballSpeed);
+    }
+    else if (bricksHit == 12)
+    {
+        ballSpeed = ballSpeed + 0.25;
+        println(" 12 hits ballSpeed: "+ballSpeed);
     }
 }
