@@ -17,7 +17,7 @@ final String filename = "CleanedUpData.csv";
 void setup() 
 {
   String[] lines = loadStrings(filename);
-  int numCountries =  lines.length -3 -(249-191); 
+  int numCountries =  lines.length -3 -(249-192); 
 
   countryOfCitizenship = new String[numCountries];
   numYear2006 = new int[numCountries]; 
@@ -36,27 +36,27 @@ void setup()
   int lineIndex = 0;
   while (lineIndex < lines.length)
   {
-    if (lineIndex < 4 || lineIndex >= lines.length - (249-191)) 
+    if (lineIndex < 3 || lineIndex >= lines.length - (249-190)) 
     {  
       lineIndex++;
       continue;
     }
 
-    int countryNum = lineIndex -4;
+    int countryNum = lineIndex -3;
     String[] splitLine = lines[lineIndex].split(",");
 
-    countryOfCitizenship = splitLine[0];
-    numYear2006 = Integer.parseInt(splitLine[1]); 
-    numYear2007 = Integer.parseInt(splitLine[2]);
-    numYear2008 = Integer.parseInt(splitLine[3]);
-    numYear2009 = Integer.parseInt(splitLine[4]);
-    numYear2010 = Integer.parseInt(splitLine[5]);
-    numYear2011 = Integer.parseInt(splitLine[6]);
-    numYear2012 = Integer.parseInt(splitLine[7]);
-    numYear2013 = Integer.parseInt(splitLine[8]);
-    numYear2014 = Integer.parseInt(splitLine[9]);
-    numYear2015 = Integer.parseInt(splitLine[10]);
-    numYearQ1_Q32016 = Integer.parseInt(splitLine[11]);
+    countryOfCitizenship[countryNum] = splitLine[0];
+    numYear2006[countryNum] = Integer.parseInt(splitLine[1]); 
+    numYear2007[countryNum] = Integer.parseInt(splitLine[2]);
+    numYear2008[countryNum] = Integer.parseInt(splitLine[3]);
+    numYear2009[countryNum] = Integer.parseInt(splitLine[4]);
+    numYear2010[countryNum] = Integer.parseInt(splitLine[5]);
+    numYear2011[countryNum] = Integer.parseInt(splitLine[6]);
+    numYear2012[countryNum] = Integer.parseInt(splitLine[7]);
+    numYear2013[countryNum] = Integer.parseInt(splitLine[8]);
+    numYear2014[countryNum] = Integer.parseInt(splitLine[9]);
+    numYear2015[countryNum] = Integer.parseInt(splitLine[10]);
+    numYearQ1_Q32016[countryNum] = Integer.parseInt(splitLine[11]);
       
     lineIndex++;
   }
