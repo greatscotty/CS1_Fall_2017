@@ -2,12 +2,16 @@
 int[] numbers; 
 int rectNum;
 final float maxRectSizeWidth = 40;
+final float maxRectSizeHeight = maxRectSizeWidth * 3/4;
+
+PFont numberFont;
 
 void setup() 
 {
     size(512, 512);
     rectNum = 10;
     numbers = randomNumberdArray(rectNum, 1, 20);
+    numberFont = loadFont("Monospaced-48.vlw");
 
     println("maxValueIndex: "+ findMaxValueIndex(numbers));
 }
@@ -56,7 +60,8 @@ int[] randomNumberdArray( int size, int minNum, int maxNum)
 float getXCoordinateForRect(int rectNum)
 {
   return (rectNum+1)*getHorizontalSpacing()
-         + rectNum*maxRectSizeWidth;
+         + rectNum*maxRectSizeWidth
+         + maxRectSizeWidth/2;
 }
 
 float getHorizontalSpacing()
@@ -66,14 +71,26 @@ float getHorizontalSpacing()
 
 void drawRect()
 {
+    
+    rectMode(CENTER);
+    int currentRect = 0;
     final float rectY = height/2;
-    final float maxRectSizeHeight = maxRectSizeWidth * 3/4;
-
-    int currentRect = 0; 
 
     while (currentRect < numbers.length) 
-    {      
+    {   
+        fill(0);
         rect(getXCoordinateForRect(currentRect), rectY, maxRectSizeWidth, maxRectSizeHeight);
+        drawRectNumber(currentRect);
         currentRect++; 
     }
+}
+
+void drawRectNumber( int rectNum)
+{   
+    final float textY = height/2;
+
+    fill(255);
+    textAlign(CENTER);
+    textFont(numberFont, maxRectSizeHeight/2);
+    text(numbers[rectNum], getXCoordinateForRect(rectNum), textY);
 }
