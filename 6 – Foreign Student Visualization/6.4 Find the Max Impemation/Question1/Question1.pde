@@ -1,15 +1,20 @@
-// int[] numbers = { 1, 2, 3, 4, 5, 10, 7, 8, 9, 0};
+
 int[] numbers; 
+int rectNum;
+final float maxRectSizeWidth = 40;
 
 void setup() 
 {
-    numbers = randomNumberdArray(10, 1, 20);
+    size(512, 512);
+    rectNum = 10;
+    numbers = randomNumberdArray(rectNum, 1, 20);
+
     println("maxValueIndex: "+ findMaxValueIndex(numbers));
 }
 
 void draw() 
 {
-    
+    drawRect();
 }
 
 int findMaxValueIndex(int[] arrayToSort)
@@ -46,4 +51,29 @@ int[] randomNumberdArray( int size, int minNum, int maxNum)
     }
    
     return array;
+}
+
+float getXCoordinateForRect(int rectNum)
+{
+  return (rectNum+1)*getHorizontalSpacing()
+         + rectNum*maxRectSizeWidth;
+}
+
+float getHorizontalSpacing()
+{
+  return (width - rectNum*maxRectSizeWidth)/(float)(rectNum+1);
+}
+
+void drawRect()
+{
+    final float rectY = height/2;
+    final float maxRectSizeHeight = maxRectSizeWidth * 3/4;
+
+    int currentRect = 0; 
+
+    while (currentRect < numbers.length) 
+    {      
+        rect(getXCoordinateForRect(currentRect), rectY, maxRectSizeWidth, maxRectSizeHeight);
+        currentRect++; 
+    }
 }
