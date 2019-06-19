@@ -78,7 +78,7 @@ void drawRect()
 
     while (currentRect < numbers.length) 
     {   
-        fill(0);
+        highlightMax(currentRect);
         rect(getXCoordinateForRect(currentRect), rectY, maxRectSizeWidth, maxRectSizeHeight);
         drawRectNumber(currentRect);
         currentRect++; 
@@ -93,4 +93,16 @@ void drawRectNumber( int rectNum)
     textAlign(CENTER);
     textFont(numberFont, maxRectSizeHeight/2);
     text(numbers[rectNum], getXCoordinateForRect(rectNum), textY);
+}
+
+void highlightMax(int rectNum)
+{
+    if(rectNum == findMaxValueIndex(numbers))
+    {
+        fill(220, 195, 0);
+    }
+    else 
+    {
+        fill(0);    
+    }
 }
