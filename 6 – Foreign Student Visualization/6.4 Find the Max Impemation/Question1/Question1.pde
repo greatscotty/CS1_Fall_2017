@@ -36,8 +36,6 @@ int findMaxValueIndex(int[] arrayToSort)
         }
         index++;
     }
-    // println("maxValue: "+maxValue); // test output line
-    // println("maxValueIndex: "+maxValueIndex); // test output line
     return maxValueIndex;
 
 }
@@ -50,7 +48,6 @@ int[] randomNumberdArray( int size, int minNum, int maxNum)
     while (i < array.length)
     {
         array[i] = int(random(minNum, maxNum+1));
-        // println("array[" + i + "] : " + array[i]); // test array building
         i++;
     }
    
