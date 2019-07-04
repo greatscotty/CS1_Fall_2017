@@ -151,7 +151,19 @@ int sumTotalStudentsForTopNCountries(int n)
 // top n countries.
 int maxTotalStudentsForTopNCountries(int n)
 {
-  return 0;
+  int countryNum = 0;
+  int max = -1;
+  while (countryNum < n)
+  {
+    if (max < numTotal_2013[countryNum])
+    {
+      max = numTotal_2013[countryNum];
+    }
+ 
+    countryNum++;
+  } 
+ 
+  return max;
 }
 
 
@@ -205,8 +217,41 @@ void drawTopNCountries()
   // will be sized relative to that.
   final int maxTotalStudents = maxTotalStudentsForTopNCountries(numCircles);
   
-  
-  
+  int rowNum = 0;
+  while (rowNum < numRows)
+  {
+    int colNum = 0;
+    while (colNum < numCols)
+    {
+      int index = rowNum*numCols + colNum;
+
+      float circleDiameter = numTotal_2013[index] / 
+                       (float)maxTotalStudents
+                       * maxCircleWidth;
+
+      final float x = getXCoordinateForRowAndCol(rowNum, colNum);
+      final float y = getYCoordinateForRowAndCol(rowNum, colNum);      
+
+      //Draw box for data
+      rectMode(CENTER); 
+      noFill();
+      stroke(210);
+      rect(x, y, maxCircleDiameter + spaceHor/5, maxCircleDiameter + spaceVer/5);
+
+      // Draw the sized Circle
+      noStroke();
+      
+      float alphaTransparency = 
+         (circleDiameter / (float)maxCircleDiameter * 150) + 100;
+      
+      fill(83,200,0,alphaTransparency);
+      ellipse(x, y, circleDiameter, circleDiameter);
+
+
+      colNum++;
+    }
+    rowNum++;
+  }
 }
 
 
@@ -225,8 +270,31 @@ void drawLineGraph(int index)
   final int axisHeight = rectHeight - 2 * padding;
   
   final int numPoints = 4; // one for each quarter 2013
+
+  // Draw a rectangle to contain the graph
+  stroke(2);
+  fill(255);
+  rect(width/2, height/2, rectWidth, rectHeight);
   
-  
+  // Label the country
+  fill(0);
+  textSize(18);
+  textAlign(CENTER, CENTER);
+  text(countryNames[index], width/2, height/2 + rectHeight/2 - padding/2); 
+
+  // Draw axes
+  line(axisX, axisY, axisX, height-axisY);
+  line(axisX, axisY, width-axisX, axisY);
+
+  // Figure out how much space to put between the points
+  // on the graph
+  int spacing = (rectWidth - 2*axisX)/numPoints;
+
+  // Draw the line graph
+  stroke(150,0,0);
+
+  // Draw each quarter's info
+  // ...but how??
 }
 
 
@@ -237,7 +305,28 @@ int getIndexOfCountryAt(int x, int y)
 {
   int index = -1; // default: not found
   
-  
+  int rowNum = 0;
+  while (rowNum < numRows)
+  {
+    int colNum = 0;
+    while (colNum < numCols)
+    {
+      int currIndex = rowNum*numCols + colNum;
+
+      float currX = getXCoordinateForRowAndCol(rowNum, colNum);
+      float currY = getYCoordinateForRowAndCol(rowNum, colNum);
+
+      if (x >= currX - maxCircleWidth/2 && x <= currX + maxCircleWidth/2 &&
+      y >= currY - maxCircleHeight/2 && y <= currY + maxCircleHeight/2)
+      {
+        index = currIndex;
+        break;
+      }
+
+      colNum++;
+    }
+    rowNum++;
+  }
   
   return index;
 }
@@ -247,5 +336,14 @@ int getIndexOfCountryAt(int x, int y)
 // mouseClicked
 void mouseClicked()
 {
-  
+  // Turn off the graph if it was on
+  if (graphShowingIndex >= 0)
+  {
+    graphShowingIndex = -1;
+  }
+  // Otherwise, figure out what index we clicked
+  else
+  {
+    graphShowingIndex = getIndexOfCountryAt(mouseX, mouseY);
+  }
 }
