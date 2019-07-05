@@ -1,0 +1,32 @@
+Question 1
+Classes are like a mold they give a general shape or outline for an object to be made. 
+
+Objects are the liquid and the alterations you make the blank that comes out of the mold. Colour's, glue used, items in the mix. Etc.
+
+Question 2
+
+//Pseudocode 
+
+Class Stock
+{
+    //Attibutes 
+    Float CurrentPrice
+    Float Array HistoryOfStockPrice - last 100 or so prices
+    String CompanyName
+    String CompanyIndustry
+}
+
+Class StockPorfolio
+{
+    //Attibutes
+    Array Stocks - Stock in the Portfolio 
+    Float SumofCurrentPrices
+}
+
+Function GetSumPortfoliaValue (input Portfolio)
+{
+    While PortfolioStocks is less than last value. 
+        StockPriceSum = StockPriceSum + Stock.CurrentPrice
+    
+    return StockPriceSum
+}
