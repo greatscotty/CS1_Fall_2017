@@ -43,9 +43,10 @@ class Grass
 void drawGrass(Grass bladeOfGrass)
 {
     fill(bladeOfGrass.colour);
-    rect(bladeOfGrass.x, bladeOfGrass.y, bladeOfGrass.width, bladeOfGrass.height);
+    rect(bladeOfGrass.x, bladeOfGrass.y, bladeOfGrass.width, -bladeOfGrass.height);
 }
-
+ 
+// Not true growth growse in both directions. Nead to convert to Grow only upward. 
 void growGrass(Grass bladeOfGrass)
 {
     if (frameCount% 10 == 0) 
