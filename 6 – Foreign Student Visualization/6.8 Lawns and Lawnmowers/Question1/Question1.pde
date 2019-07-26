@@ -66,9 +66,12 @@ void growGrass(Grass bladeOfGrass)
     }
 }
 
-void cutGrass(Grass bladeOfGrass)
+void cutGrass(Grass bladeOfGrass, int cutHeight)
 {   
-    bladeOfGrass.height = 0; 
+    if (bladeOfGrass.height > cutHeight)
+    {
+    bladeOfGrass.height = cutHeight; 
+    }
 }
 
 void mouseClicked()
@@ -80,7 +83,7 @@ void mouseClicked()
         {
             if (mouseY <= grass[bladeNum].y + grass[bladeNum].height/2 && mouseY >= grass[bladeNum].y - grass[bladeNum].height/2)
             {
-                cutGrass(grass[bladeNum]);
+                cutGrass(grass[bladeNum], 0);
                 break;
             }
         }
@@ -97,7 +100,7 @@ void mouseMoved()
         {
             if (mouseY -25 <= grass[bladeNum].y && mouseY +25 >= grass[bladeNum].y)
             {
-                cutGrass(grass[bladeNum]);
+                cutGrass(grass[bladeNum], 3);
             }
         }
         bladeNum++;
