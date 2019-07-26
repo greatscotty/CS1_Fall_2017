@@ -40,6 +40,14 @@ class Grass
   final int width =3;
 }
 
+class LawnMower
+{
+    float x;
+    float y; 
+    float width;
+    float height;
+}
+
 void drawGrass(Grass bladeOfGrass)
 {
     fill(bladeOfGrass.colour);
@@ -74,6 +82,22 @@ void mouseClicked()
             {
                 cutGrass(grass[bladeNum]);
                 break;
+            }
+        }
+        bladeNum++;
+    }
+}
+
+void mouseMoved()
+{
+    int bladeNum = 0;
+    while (bladeNum < grass.length)
+    {
+        if (mouseX -25 <= grass[bladeNum].x  && mouseX +25 >= grass[bladeNum].x )
+        {
+            if (mouseY -25 <= grass[bladeNum].y && mouseY +25 >= grass[bladeNum].y)
+            {
+                cutGrass(grass[bladeNum]);
             }
         }
         bladeNum++;
