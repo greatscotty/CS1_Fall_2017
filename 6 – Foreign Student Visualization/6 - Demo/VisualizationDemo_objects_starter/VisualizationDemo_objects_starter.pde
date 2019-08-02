@@ -345,6 +345,22 @@ void drawLineGraph(int index)
   
   // With objects, we can loop over a single array to get
   // at the data points 
+
+  float lastPointX = axisX;
+  float lastPointY = axisY;
+
+  int pointNum = 0;
+  while (pointNum < numPoints)
+  {
+    float yValue = countryData[index].quarters_2013[pointNum];
+    yValue = yValue / maxValue * axisHeight;
+    yValue = axisY - yValue;
+  
+    line(lastPointX, lastPointY, lastPointX+spacing, yValue);
+    lastPointX = lastPointX+spacing;
+    lastPointY = yValue;
+    pointNum++;
+  }
 }
 
 
