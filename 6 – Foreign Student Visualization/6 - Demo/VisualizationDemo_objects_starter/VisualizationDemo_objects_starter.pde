@@ -164,7 +164,7 @@ int sumTotalStudentsForTopNCountries(int n)
   int sum = 0;
   while (countryNum < n)
   {
-    sum += numTotal_2013[countryNum];
+    sum += countryData[countryNum].total_2013;
     countryNum++;
   } 
   
@@ -181,9 +181,9 @@ int maxTotalStudentsForTopNCountries(int n)
   int max = -1;
   while (countryNum < n)
   {
-    if (max < numTotal_2013[countryNum])
+    if (max < countryData[countryNum].total_2013)
     {
-      max = numTotal_2013[countryNum];
+      max = countryData[countryNum].total_2013;
     }
     
     countryNum++;
@@ -255,7 +255,7 @@ void drawTopNCountries()
       
       // Get the relative circle size according to a percentage of
       // the maximum
-      float circleDiameter = numTotal_2013[index] / 
+      float circleDiameter = countryData[index].total_2013 / 
                            (float)maxTotalStudents
                            * maxCircleDiameter;
       
@@ -289,7 +289,7 @@ void drawTopNCountries()
       fill(0);
       textAlign(CENTER,BOTTOM);
       textSize(12);
-      text(countryNames[index], 
+      text( countryData[index].countryName, 
            x, y + maxCircleDiameter/2 - spaceVer/2, 
            maxCircleDiameter - 20, spaceVer);
       
@@ -327,7 +327,7 @@ void drawLineGraph(int index)
   fill(0);
   textSize(18);
   textAlign(CENTER, CENTER);
-  text(countryNames[index], width/2, height/2 + rectHeight/2 - padding/2); 
+  text(countryData[index].countryName, width/2, height/2 + rectHeight/2 - padding/2); 
   
   // Draw axes
   line(axisX, axisY, axisX, height-axisY);
