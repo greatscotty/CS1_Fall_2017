@@ -1,5 +1,6 @@
 final int pumpkinWidth = 89;
 final int pumpkinHeight = 71;
+Pumpkin pumpkins[] = new Pumpkin[13];
 
 class Pumpkin
 {
@@ -18,12 +19,25 @@ void setup()
   size(800, 600);
   background(0);
   smooth();
+
+int pumpkinNum = 0;
+  while (pumpkinNum < pumpkins.length) 
+  {
+    pumpkins[pumpkinNum] = new Pumpkin(random(0 + pumpkinWidth/2, width- pumpkinWidth/2), random(0 + pumpkinHeight/2, height - pumpkinHeight/2));
+    pumpkinNum++;
+  }
 }
 
 void draw()
 {
-  Pumpkin p = new Pumpkin(width/2, height/2);
-  drawPumpkin(p);
+
+  int pumpkinNum = 0; 
+  while (pumpkinNum < pumpkins.length) 
+  {
+    drawPumpkin(pumpkins[pumpkinNum]);
+    pumpkinNum++;
+  }
+  
 }
 
 void drawPumpkin(Pumpkin p)
