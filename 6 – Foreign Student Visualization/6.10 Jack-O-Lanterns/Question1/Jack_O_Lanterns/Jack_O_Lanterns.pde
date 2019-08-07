@@ -1,6 +1,6 @@
 final int pumpkinWidth = 89;
 final int pumpkinHeight = 71;
-Pumpkin pumpkins[] = new Pumpkin[13];
+Pumpkin pumpkins[] = new Pumpkin[7];
 
 class Pumpkin
 {
@@ -28,6 +28,7 @@ int pumpkinNum = 0;
     pumpkins[pumpkinNum] = new Pumpkin(random(0 + pumpkinWidth/2, width- pumpkinWidth/2), random(0 + pumpkinHeight/2, height - pumpkinHeight/2), true);
     pumpkinNum++;
   }
+  initPumpkins(pumpkins);
 }
 
 void draw()
@@ -61,4 +62,26 @@ void drawPumpkin(Pumpkin p)
     triangle(p.x , p.y - pumpkinHeight/10, p.x + pumpkinWidth/10, p.y + pumpkinHeight/10, p.x - pumpkinWidth/10, p.y + pumpkinHeight/10);
     arc(p.x, p.y + pumpkinHeight/4 , pumpkinWidth/3, pumpkinHeight/5, 0, PI);
   }
+}
+
+void initPumpkins(Pumpkin[] patch)
+{
+  int pumpkinNum = 0; 
+  while ( pumpkinNum < patch.length)
+  {
+    patch[pumpkinNum].x = ((pumpkinNum+1) * getHorizontalSpacing()) + pumpkinWidth*pumpkinNum + pumpkinWidth/2; 
+    patch[pumpkinNum].y = height/2;
+    patch[pumpkinNum].jackOLantern = randomBool();
+    pumpkinNum++;
+  }
+}
+
+boolean randomBool()
+{
+  return random(1) > 0.5;
+}
+
+float getHorizontalSpacing()
+{
+  return (width - (pumpkinWidth * pumpkins.length))/ (float)(pumpkins.length + 1);
 }
