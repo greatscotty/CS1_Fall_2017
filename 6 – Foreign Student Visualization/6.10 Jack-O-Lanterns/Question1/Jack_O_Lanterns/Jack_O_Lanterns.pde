@@ -6,11 +6,13 @@ class Pumpkin
 {
   float x;
   float y;
+  boolean jackOLantern;
 
-  Pumpkin(float newX, float newY)
+  Pumpkin(float newX, float newY, boolean isJackOLantern)
   {
     x = newX;
     y = newY;
+    jackOLantern = isJackOLantern;
   }
 }
 
@@ -23,7 +25,7 @@ void setup()
 int pumpkinNum = 0;
   while (pumpkinNum < pumpkins.length) 
   {
-    pumpkins[pumpkinNum] = new Pumpkin(random(0 + pumpkinWidth/2, width- pumpkinWidth/2), random(0 + pumpkinHeight/2, height - pumpkinHeight/2));
+    pumpkins[pumpkinNum] = new Pumpkin(random(0 + pumpkinWidth/2, width- pumpkinWidth/2), random(0 + pumpkinHeight/2, height - pumpkinHeight/2), true);
     pumpkinNum++;
   }
 }
@@ -50,4 +52,13 @@ void drawPumpkin(Pumpkin p)
        p.x - 5, p.y - pumpkinHeight/2 - 5, 
        p.x + 5, p.y - pumpkinHeight/2 - 5, 
        p.x + 3, p.y - pumpkinHeight/2 + 5);
+
+  if (p.jackOLantern == true) 
+  {
+    fill(0);
+    ellipse(p.x - pumpkinWidth/5, p.y - pumpkinHeight/4, pumpkinHeight/4, pumpkinHeight/4);
+    ellipse(p.x + pumpkinWidth/5, p.y - pumpkinHeight/4, pumpkinHeight/4, pumpkinHeight/4);
+    triangle(p.x , p.y - pumpkinHeight/10, p.x + pumpkinWidth/10, p.y + pumpkinHeight/10, p.x - pumpkinWidth/10, p.y + pumpkinHeight/10);
+    arc(p.x, p.y + pumpkinHeight/4 , pumpkinWidth/3, pumpkinHeight/5, 0, PI);
+  }
 }
