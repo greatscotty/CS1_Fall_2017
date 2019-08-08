@@ -85,3 +85,20 @@ float getHorizontalSpacing()
 {
   return (width - (pumpkinWidth * pumpkins.length))/ (float)(pumpkins.length + 1);
 }
+
+void mouseClicked()
+{
+  int pumpkinNum = 0; 
+  while (pumpkinNum < pumpkins.length) 
+  {
+    if (mouseY > (pumpkins[pumpkinNum].y - pumpkinHeight) && mouseY < (pumpkins[pumpkinNum].y + pumpkinHeight))
+    {
+      if (mouseX > (pumpkins[pumpkinNum].x - pumpkinWidth) && mouseX < (pumpkins[pumpkinNum].x + pumpkinWidth))
+      {
+        pumpkins[pumpkinNum].jackOLantern = true; 
+      }
+    }
+
+    pumpkinNum++;
+  }
+}
