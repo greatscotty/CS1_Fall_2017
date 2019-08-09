@@ -11,10 +11,10 @@ class Pumpkin
 
   Pumpkin(float newX, float newY, boolean isJackOLantern, boolean isLit)
   {
-    x = newX;
-    y = newY;
-    jackOLantern = isJackOLantern;
-    lit = isLit;
+    this.x = newX;
+    this.y = newY;
+    this.jackOLantern = isJackOLantern;
+    this.lit = isLit;
   }
 }
 
