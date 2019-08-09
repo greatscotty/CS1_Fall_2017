@@ -7,12 +7,14 @@ class Pumpkin
   float x;
   float y;
   boolean jackOLantern;
+  boolean lit;
 
-  Pumpkin(float newX, float newY, boolean isJackOLantern)
+  Pumpkin(float newX, float newY, boolean isJackOLantern, boolean isLit)
   {
     x = newX;
     y = newY;
     jackOLantern = isJackOLantern;
+    lit = isLit;
   }
 }
 
@@ -25,7 +27,7 @@ void setup()
 int pumpkinNum = 0;
   while (pumpkinNum < pumpkins.length) 
   {
-    pumpkins[pumpkinNum] = new Pumpkin(random(0 + pumpkinWidth/2, width- pumpkinWidth/2), random(0 + pumpkinHeight/2, height - pumpkinHeight/2), true);
+    pumpkins[pumpkinNum] = new Pumpkin(random(0 + pumpkinWidth/2, width- pumpkinWidth/2), random(0 + pumpkinHeight/2, height - pumpkinHeight/2), true, false);
     pumpkinNum++;
   }
   initPumpkins(pumpkins);
@@ -56,7 +58,14 @@ void drawPumpkin(Pumpkin p)
 
   if (p.jackOLantern == true) 
   {
-    fill(0);
+    if (p.lit == true)
+    {
+      fill(250,200,95);
+    }
+    else
+    {
+      fill(0); 
+    }
     ellipse(p.x - pumpkinWidth/5, p.y - pumpkinHeight/4, pumpkinHeight/4, pumpkinHeight/4);
     ellipse(p.x + pumpkinWidth/5, p.y - pumpkinHeight/4, pumpkinHeight/4, pumpkinHeight/4);
     triangle(p.x , p.y - pumpkinHeight/10, p.x + pumpkinWidth/10, p.y + pumpkinHeight/10, p.x - pumpkinWidth/10, p.y + pumpkinHeight/10);
@@ -72,6 +81,7 @@ void initPumpkins(Pumpkin[] patch)
     patch[pumpkinNum].x = ((pumpkinNum+1) * getHorizontalSpacing()) + pumpkinWidth*pumpkinNum + pumpkinWidth/2; 
     patch[pumpkinNum].y = height/2;
     patch[pumpkinNum].jackOLantern = randomBool();
+    patch[pumpkinNum].lit = false;
     pumpkinNum++;
   }
 }
@@ -101,7 +111,14 @@ void mouseClicked()
 
     if (dist(pumpkins[pumpkinNum].x, pumpkins[pumpkinNum].y, mouseX, mouseY) < pumpkinWidth/2)
     {
-      pumpkins[pumpkinNum].jackOLantern = true; 
+      if (pumpkins[pumpkinNum].jackOLantern == true)
+      {
+        pumpkins[pumpkinNum].lit = true;
+      }
+      else
+      {
+        pumpkins[pumpkinNum].jackOLantern = true; 
+      }
     }
 
     pumpkinNum++;
