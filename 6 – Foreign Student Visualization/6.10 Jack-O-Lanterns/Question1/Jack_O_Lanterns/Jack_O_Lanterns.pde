@@ -91,12 +91,17 @@ void mouseClicked()
   int pumpkinNum = 0; 
   while (pumpkinNum < pumpkins.length) 
   {
-    if (mouseY > (pumpkins[pumpkinNum].y - pumpkinHeight) && mouseY < (pumpkins[pumpkinNum].y + pumpkinHeight))
+    // if (mouseY > (pumpkins[pumpkinNum].y - pumpkinHeight) && mouseY < (pumpkins[pumpkinNum].y + pumpkinHeight))
+    // {
+    //   if (mouseX > (pumpkins[pumpkinNum].x - pumpkinWidth) && mouseX < (pumpkins[pumpkinNum].x + pumpkinWidth))
+    //   {
+    //     pumpkins[pumpkinNum].jackOLantern = true; 
+    //   }
+    // }
+
+    if (dist(pumpkins[pumpkinNum].x, pumpkins[pumpkinNum].y, mouseX, mouseY) < pumpkinWidth/2)
     {
-      if (mouseX > (pumpkins[pumpkinNum].x - pumpkinWidth) && mouseX < (pumpkins[pumpkinNum].x + pumpkinWidth))
-      {
-        pumpkins[pumpkinNum].jackOLantern = true; 
-      }
+      pumpkins[pumpkinNum].jackOLantern = true; 
     }
 
     pumpkinNum++;
