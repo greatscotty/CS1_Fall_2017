@@ -49,8 +49,8 @@ void draw()
 float getHorizontalSpacing( int treeNum, Tree[] forest)
  {
     float spaceAvailible = width/forest.length;
-    println("spaceAvailible: "+spaceAvailible);
-    println("treeNum: "+treeNum);
+    // println("spaceAvailible: "+spaceAvailible);
+    // println("treeNum: "+treeNum);
     float spacing = (spaceAvailible * (treeNum +1))/2 + (spaceAvailible*treeNum)/2; // look into this equation, Why is it nor even spacing.
     return spacing;
 }
@@ -60,7 +60,7 @@ void drawTree(Tree t)
     fill(101, 67, 33);
     rectMode(CENTER);
     rect(t.x, t.y, t.width, t.height);
-    line(t.x, 0, t.x, height);
+    // line(t.x, 0, t.x, height);
     fill(t.leafColour);
     ellipse(t.x, t.y - t.height*3/4, t.width*2, t.height);
 }
