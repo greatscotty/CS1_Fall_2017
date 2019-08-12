@@ -26,6 +26,23 @@ void setup()
 void sortArray(int[] numbers)
 {
   // Implement the insertion sort algorithm here
+
+  int currentStartIndex = 1;
+
+  while (currentStartIndex < sortedNumbers.length)
+  {
+    int innerIndex = currentStartIndex;
+
+    while (innerIndex > 0 && numbers[innerIndex] < numbers[innerIndex-1])
+    {
+      int numberHolder = numbers[innerIndex]; //check if there is a better way to swap without a placeholder.. 
+      numbers[innerIndex] = numbers[innerIndex-1];
+      numbers[innerIndex -1] = numberHolder;
+
+      innerIndex--;
+    }
+    currentStartIndex++;
+  }
 }
 
 void draw()
